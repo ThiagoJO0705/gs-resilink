@@ -8,9 +8,8 @@ import { EnergyOutageEvent } from '../types';
 
 interface GeneralOverviewProps {
   events: EnergyOutageEvent[]; // Recebe a lista de eventos como prop
-  // Adicionar navigation e route props que são injetadas pelo Stack.Screen
   navigation: AppNavigationProp;
-  route: any; // Type 'any' for simplicity as route isn't used directly here
+  route: any;
 }
 
 const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation }) => {
@@ -18,11 +17,13 @@ const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation })
     navigation.navigate('AffectedLocation');
   };
 
+  const handleViewEventDetails = (event: EnergyOutageEvent) => {
+    navigation.navigate('EventDetail', { event }); // Navega para a tela de detalhes, passando o evento
+  };
+
   const [isRefreshing, setIsRefreshing] = useState(false);
   const onRefresh = React.useCallback(() => {
     setIsRefreshing(true);
-    // Em um app real, aqui você recarregaria os dados do armazenamento
-    // Por enquanto, apenas simula um tempo de carregamento
     setTimeout(() => {
       setIsRefreshing(false);
     }, 2000);
@@ -41,9 +42,12 @@ const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation })
         {events.length === 0 ? (
           <Text style={styles.noEventsText}>Nenhum evento registrado ainda.</Text>
         ) : (
-          // Mapeia e exibe os eventos recebidos via props
           events.map((event) => (
-            <EventCard key={event.id} event={event} onPress={() => { /* Navegar para detalhes do evento se necessário */ }} />
+            <EventCard
+              key={event.id}
+              event={event}
+              onPress={handleViewEventDetails} // <-- PASSAR A FUNÇÃO PARA TRATAR O CLIQUE
+            />
           ))
         )}
       </ScrollView>

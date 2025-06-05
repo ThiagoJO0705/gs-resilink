@@ -1,21 +1,21 @@
 
-import { EnergyOutageEvent } from '../types'; 
+import { NavigatorScreenParams, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RouteProp } from '@react-navigation/native';
+import { EnergyOutageEvent } from '../types';
 
-type RootStackParamList = {
+export type RootStackParamList = {
   GeneralOverview: undefined;
-  AffectedLocation: undefined; 
-  InterruptionTime: { eventId?: string, location?: string }; 
-  DamagesDescription: { eventId?: string, location?: string, interruptionTime?: string };
+  AffectedLocation: undefined;
+  InterruptionTime: { location: string };
+  DamagesDescription: { location: string; interruptionTime: string };
   Recommendations: undefined;
-  RegisterEvent: { event?: EnergyOutageEvent };
+  EventDetail: { event: EnergyOutageEvent }; // <-- NOVA ROTA para detalhes do evento
 };
 
-type AppNavigationProp = NativeStackNavigationProp<RootStackParamList>;
+// Tipagem para o hook useNavigation
+export type AppNavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
-type InterruptionTimeRouteProp = RouteProp<RootStackParamList, 'InterruptionTime'>;
-
-type DamagesDescriptionRouteProp = RouteProp<RootStackParamList, 'DamagesDescription'>;
-
-export {DamagesDescriptionRouteProp, InterruptionTimeRouteProp, AppNavigationProp, RootStackParamList}
+// Tipagem para o hook useRoute
+export type InterruptionTimeRouteProp = RouteProp<RootStackParamList, 'InterruptionTime'>;
+export type DamagesDescriptionRouteProp = RouteProp<RootStackParamList, 'DamagesDescription'>;
+export type EventDetailRouteProp = RouteProp<RootStackParamList, 'EventDetail'>; // <-- NOVA TIPAGEM para route da tela de detalhe

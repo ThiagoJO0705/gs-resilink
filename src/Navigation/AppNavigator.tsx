@@ -2,7 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './types';
-import { EnergyOutageEvent } from '../types'; // Importar o tipo
+import { EnergyOutageEvent } from '../types';
 
 // Importar as telas
 import GeneralOverview from '../Screens/GeneralOverview';
@@ -10,6 +10,7 @@ import AffectedLocation from '../Screens/AffectedLocation';
 import InterruptionTime from '../Screens/InterruptionTime';
 import DamagesDescription from '../Screens/DamagesDescription';
 import Recommendations from '../Screens/Recommendations';
+import EventDetail from '../Screens/EventDetail'; // <-- IMPORTAR NOVA TELA
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,7 +27,6 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ events, addEvent }) => {
           name="GeneralOverview"
           options={{ headerShown: false }}
         >
-          {/* Passa as props para a tela GeneralOverview */}
           {(props) => <GeneralOverview {...props} events={events} />}
         </Stack.Screen>
 
@@ -44,13 +44,18 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ events, addEvent }) => {
           name="DamagesDescription"
           options={{ headerShown: false }}
         >
-          {/* Passa a função addEvent para a tela DamagesDescription */}
           {(props) => <DamagesDescription {...props} addEvent={addEvent} />}
         </Stack.Screen>
 
         <Stack.Screen
           name="Recommendations"
           component={Recommendations}
+          options={{ headerShown: false }}
+        />
+
+        <Stack.Screen // <-- ADICIONAR NOVA TELA AO STACK
+          name="EventDetail"
+          component={EventDetail}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

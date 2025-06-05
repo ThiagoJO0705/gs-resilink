@@ -1,11 +1,10 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { EnergyOutageEvent } from '../types';
-
 
 interface EventCardProps {
   event: EnergyOutageEvent;
-  onPress?: (event: EnergyOutageEvent) => void;
+  onPress?: (event: EnergyOutageEvent) => void; // A prop onPress agora será usada para navegar
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, onPress }) => {
@@ -13,10 +12,12 @@ const EventCard: React.FC<EventCardProps> = ({ event, onPress }) => {
     <TouchableOpacity style={localStyles.card} onPress={() => onPress && onPress(event)}>
       <Text style={localStyles.locationText}>Localização: {event.location}</Text>
       <Text style={localStyles.detailText}>Tempo de Interrupção: {event.interruptionTime}</Text>
-      {event.damages && (
+      {/* Removido a linha de prejuízos para deixar os detalhes para a nova tela, mas pode manter se preferir */}
+      {/* {event.damages && (
         <Text style={localStyles.detailText}>Prejuízos: {event.damages}</Text>
-      )}
+      )} */}
       <Text style={localStyles.dateText}>Registrado em: {event.timestamp}</Text>
+      <Text style={localStyles.viewDetailsText}>Toque para ver detalhes...</Text>
     </TouchableOpacity>
   );
 };
@@ -49,6 +50,13 @@ const localStyles = StyleSheet.create({
     marginTop: 5,
     textAlign: 'right',
   },
+  viewDetailsText: {
+    fontSize: 14,
+    color: '#007AFF',
+    marginTop: 5,
+    textAlign: 'center',
+    textDecorationLine: 'underline',
+  }
 });
 
 export default EventCard;
