@@ -1,20 +1,30 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, StatusBar } from 'react-native';
-import { Ionicons } from '@expo/vector-icons'; // Para o ícone de voltar, se estiver usando Expo. Se não, use outro ícone.
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons"; 
 
 interface HeaderProps {
   title: string;
-  showBackButton?: boolean; // Nova prop
-  onBackPress?: () => void; // Nova prop
+  showBackButton?: boolean; 
+  onBackPress?: () => void; 
 }
 
-const Header: React.FC<HeaderProps> = ({ title, showBackButton = false, onBackPress }) => {
+const Header: React.FC<HeaderProps> = ({
+  title,
+  showBackButton = false,
+  onBackPress,
+}) => {
   return (
     <View style={localStyles.headerContainer}>
       <StatusBar
         animated={true}
-        backgroundColor="#4444ff" // Cor de exemplo do Header
-        barStyle="light-content" // Para texto branco no cabeçalho azul
+        backgroundColor="#4444ff"
+        barStyle="light-content"
         hidden={false}
       />
       {showBackButton && (
@@ -23,7 +33,6 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false, onBackPr
         </TouchableOpacity>
       )}
       <Text style={localStyles.headerTitle}>{title}</Text>
-      {/* Espaço para alinhar o título ao centro se houver botão de voltar */}
       {showBackButton && <View style={localStyles.backButtonPlaceholder} />}
     </View>
   );
@@ -31,27 +40,27 @@ const Header: React.FC<HeaderProps> = ({ title, showBackButton = false, onBackPr
 
 const localStyles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: '#4444ff',
+    backgroundColor: "#4444ff",
     padding: 15,
-    alignItems: 'center',
-    justifyContent: 'space-between', // Para distribuir os itens
-    flexDirection: 'row', // Para alinhar horizontalmente
+    alignItems: "center",
+    justifyContent: "space-between", 
+    flexDirection: "row", 
     paddingTop: StatusBar.currentHeight || 20,
   },
   headerTitle: {
-    color: 'white',
+    color: "white",
     fontSize: 20,
-    fontWeight: 'bold',
-    flex: 1, // Faz o título ocupar o máximo de espaço possível
-    textAlign: 'center', // Centraliza o texto
+    fontWeight: "bold",
+    flex: 1, 
+    textAlign: "center", 
   },
   backButton: {
     padding: 5,
-    marginRight: 10, // Espaçamento entre o botão e o título
+    marginRight: 10,
   },
   backButtonPlaceholder: {
-    width: 34, // Largura similar ao backButton para centralizar o título
-  }
+    width: 34,
+  },
 });
 
 export default Header;

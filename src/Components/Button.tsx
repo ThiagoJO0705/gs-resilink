@@ -1,6 +1,5 @@
-import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-
+import React from "react";
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
 interface ButtonProps {
   title: string;
@@ -17,16 +16,16 @@ const Button: React.FC<ButtonProps> = ({ title, onPress }) => {
 
 const localStyles = StyleSheet.create({
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 5,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 

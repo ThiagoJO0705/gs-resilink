@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
-import Header from '../Components/Header';
-import InputField from '../Components/InputField';
-import Button from '../Components/Button';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { AppNavigationProp, DamagesDescriptionRouteProp } from '../Navigation/types';
-import { EnergyOutageEvent } from '../types';
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
+import Header from "../Components/Header";
+import InputField from "../Components/InputField";
+import Button from "../Components/Button";
+import {
+  AppNavigationProp,
+  DamagesDescriptionRouteProp,
+} from "../Navigation/types";
+import { EnergyOutageEvent } from "../types";
 
 interface DamagesDescriptionProps {
-  addEvent: (newEvent: EnergyOutageEvent) => void; // Recebe a função addEvent como prop
-  // Adicionar navigation e route props que são injetadas pelo Stack.Screen
+  addEvent: (newEvent: EnergyOutageEvent) => void;
   navigation: AppNavigationProp;
   route: DamagesDescriptionRouteProp;
 }
 
-const DamagesDescription: React.FC<DamagesDescriptionProps> = ({ addEvent, navigation, route }) => {
+const DamagesDescription: React.FC<DamagesDescriptionProps> = ({
+  addEvent,
+  navigation,
+  route,
+}) => {
   const { location, interruptionTime } = route.params || {};
 
-  const [damages, setDamages] = useState('');
+  const [damages, setDamages] = useState("");
 
   const handleRegisterEvent = () => {
-    if (damages.trim() === '') {
-      Alert.alert('Aviso', 'Nenhum prejuízo descrito. Continuar mesmo assim?', [
-        { text: 'Não', style: 'cancel' },
-        { text: 'Sim', onPress: saveEvent },
+    if (damages.trim() === "") {
+      Alert.alert("Aviso", "Nenhum prejuízo descrito. Continuar mesmo assim?", [
+        { text: "Não", style: "cancel" },
+        { text: "Sim", onPress: saveEvent },
       ]);
     } else {
       saveEvent();
@@ -32,19 +37,20 @@ const DamagesDescription: React.FC<DamagesDescriptionProps> = ({ addEvent, navig
 
   const saveEvent = () => {
     const newEvent: EnergyOutageEvent = {
-      id: String(Date.now()), // Gerar um ID único simples
-      location: location || 'Não informado',
-      interruptionTime: interruptionTime || 'Não informado',
-      damages: damages.trim() === '' ? 'Nenhum prejuízo reportado.' : damages,
-      timestamp: new Date().toLocaleString('pt-BR'),
+      id: String(Date.now()),
+      location: location || "Não informado",
+      interruptionTime: interruptionTime || "Não informado",
+      damages: damages.trim() === "" ? "Nenhum prejuízo reportado." : damages,
+      timestamp: new Date().toLocaleString("pt-BR"),
     };
 
-    addEvent(newEvent); // Adiciona o novo evento à lista centralizada
+    addEvent(newEvent);
 
-    // AQUI ESTÁ A NAVEGAÇÃO PARA VOLTAR PARA A TELA DE PANORAMA GERAL
-    Alert.alert('Sucesso!', 'Evento de falta de energia registrado com sucesso!', [
-      { text: 'OK', onPress: () => navigation.navigate('GeneralOverview') }, // <-- ESTE É O COMANDO CHAVE
-    ]);
+    Alert.alert(
+      "Sucesso!",
+      "Evento de falta de energia registrado com sucesso!",
+      [{ text: "OK", onPress: () => navigation.navigate("GeneralOverview") }]
+    );
   };
 
   const handleGoBack = () => {
@@ -60,10 +66,16 @@ const DamagesDescription: React.FC<DamagesDescriptionProps> = ({ addEvent, navig
       />
       <View style={styles.content}>
         <Text style={styles.instructionText}>
-          Localização: <Text style={styles.dataHighlight}>{location || 'Não informado'}</Text>
+          Localização:{" "}
+          <Text style={styles.dataHighlight}>
+            {location || "Não informado"}
+          </Text>
         </Text>
         <Text style={styles.instructionText}>
-          Tempo de Interrupção: <Text style={styles.dataHighlight}>{interruptionTime || 'Não informado'}</Text>
+          Tempo de Interrupção:{" "}
+          <Text style={styles.dataHighlight}>
+            {interruptionTime || "Não informado"}
+          </Text>
         </Text>
         <Text style={styles.instructionText}>
           Descreva os prejuízos observados na região:
@@ -85,7 +97,7 @@ const DamagesDescription: React.FC<DamagesDescriptionProps> = ({ addEvent, navig
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
   },
   content: {
     flex: 1,
@@ -94,13 +106,12 @@ const styles = StyleSheet.create({
   instructionText: {
     fontSize: 16,
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   dataHighlight: {
-    fontWeight: 'bold',
-    color: '#007AFF',
+    fontWeight: "bold",
+    color: "#007AFF",
   },
 });
-
 
 export default DamagesDescription;

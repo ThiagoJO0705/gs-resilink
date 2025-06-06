@@ -1,12 +1,12 @@
-import React from 'react';
-import { TextInput, Text, View, StyleSheet } from 'react-native';
+import React from "react";
+import { TextInput, Text, View, StyleSheet } from "react-native";
 
 interface InputFieldProps {
   label: string;
   value: string;
   onChangeText: (text: string) => void;
   placeholder?: string;
-  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
+  keyboardType?: "default" | "numeric" | "email-address" | "phone-pad";
   secureTextEntry?: boolean;
   multiline?: boolean;
   numberOfLines?: number;
@@ -17,7 +17,7 @@ const InputField: React.FC<InputFieldProps> = ({
   value,
   onChangeText,
   placeholder,
-  keyboardType = 'default',
+  keyboardType = "default",
   secureTextEntry = false,
   multiline = false,
   numberOfLines = 1,
@@ -26,7 +26,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <View style={localStyles.container}>
       <Text style={localStyles.label}>{label}</Text>
       <TextInput
-        style={[localStyles.input, multiline && { height: numberOfLines * 20 }]} 
+        style={[localStyles.input, multiline && { height: numberOfLines * 20 }]}
         onChangeText={onChangeText}
         placeholder={placeholder}
         keyboardType={keyboardType}
@@ -45,11 +45,11 @@ const localStyles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 4,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     padding: 10,
     borderRadius: 5,
     fontSize: 16,

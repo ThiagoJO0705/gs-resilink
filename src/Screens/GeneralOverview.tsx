@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, RefreshControl } from 'react-native';
-import Header from '../Components/Header';
-import EventCard from '../Components/EventCard';
-import Button from '../Components/Button';
-import { AppNavigationProp } from '../Navigation/types';
-import { EnergyOutageEvent } from '../types';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  RefreshControl,
+} from "react-native";
+import Header from "../Components/Header";
+import EventCard from "../Components/EventCard";
+import Button from "../Components/Button";
+import { AppNavigationProp } from "../Navigation/types";
+import { EnergyOutageEvent } from "../types";
 
 interface GeneralOverviewProps {
-  events: EnergyOutageEvent[]; // Recebe a lista de eventos como prop
+  events: EnergyOutageEvent[];
   navigation: AppNavigationProp;
   route: any;
 }
 
-const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation }) => {
+const GeneralOverview: React.FC<GeneralOverviewProps> = ({
+  events,
+  navigation,
+}) => {
   const handleAddEvent = () => {
-    navigation.navigate('AffectedLocation');
+    navigation.navigate("AffectedLocation");
   };
 
   const handleViewEventDetails = (event: EnergyOutageEvent) => {
-    navigation.navigate('EventDetail', { event }); // Navega para a tela de detalhes, passando o evento
+    navigation.navigate("EventDetail", { event });
   };
 
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -40,20 +49,25 @@ const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation })
       >
         <Text style={styles.sectionTitle}>Eventos de Falta de Energia:</Text>
         {events.length === 0 ? (
-          <Text style={styles.noEventsText}>Nenhum evento registrado ainda.</Text>
+          <Text style={styles.noEventsText}>
+            Nenhum evento registrado ainda.
+          </Text>
         ) : (
           events.map((event) => (
             <EventCard
               key={event.id}
               event={event}
-              onPress={handleViewEventDetails} // <-- PASSAR A FUNÇÃO PARA TRATAR O CLIQUE
+              onPress={handleViewEventDetails}
             />
           ))
         )}
       </ScrollView>
       <View style={styles.buttonContainer}>
         <Button title="Registrar Novo Evento" onPress={handleAddEvent} />
-        <Button title="Ver Recomendações" onPress={() => navigation.navigate('Recommendations')} />
+        <Button
+          title="Ver Recomendações"
+          onPress={() => navigation.navigate("Recommendations")}
+        />
       </View>
     </View>
   );
@@ -62,29 +76,29 @@ const GeneralOverview: React.FC<GeneralOverviewProps> = ({ events, navigation })
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
   },
   scrollView: {
     flex: 1,
   },
   sectionTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     margin: 16,
-    color: '#333',
+    color: "#333",
   },
   noEventsText: {
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 20,
     fontSize: 16,
-    color: '#666',
+    color: "#666",
   },
   buttonContainer: {
     padding: 16,
     borderTopWidth: 1,
-    borderColor: '#eee',
-    backgroundColor: 'white',
-  }
+    borderColor: "#eee",
+    backgroundColor: "white",
+  },
 });
 
 export default GeneralOverview;

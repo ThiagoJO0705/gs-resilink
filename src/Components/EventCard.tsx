@@ -1,35 +1,40 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { EnergyOutageEvent } from '../types';
+import React from "react";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { EnergyOutageEvent } from "../types";
 
 interface EventCardProps {
   event: EnergyOutageEvent;
-  onPress?: (event: EnergyOutageEvent) => void; // A prop onPress agora será usada para navegar
+  onPress?: (event: EnergyOutageEvent) => void;
 }
 
 const EventCard: React.FC<EventCardProps> = ({ event, onPress }) => {
   return (
-    <TouchableOpacity style={localStyles.card} onPress={() => onPress && onPress(event)}>
-      <Text style={localStyles.locationText}>Localização: {event.location}</Text>
-      <Text style={localStyles.detailText}>Tempo de Interrupção: {event.interruptionTime}</Text>
-      {/* Removido a linha de prejuízos para deixar os detalhes para a nova tela, mas pode manter se preferir */}
-      {/* {event.damages && (
-        <Text style={localStyles.detailText}>Prejuízos: {event.damages}</Text>
-      )} */}
+    <TouchableOpacity
+      style={localStyles.card}
+      onPress={() => onPress && onPress(event)}
+    >
+      <Text style={localStyles.locationText}>
+        Localização: {event.location}
+      </Text>
+      <Text style={localStyles.detailText}>
+        Tempo de Interrupção: {event.interruptionTime}
+      </Text>
       <Text style={localStyles.dateText}>Registrado em: {event.timestamp}</Text>
-      <Text style={localStyles.viewDetailsText}>Toque para ver detalhes...</Text>
+      <Text style={localStyles.viewDetailsText}>
+        Toque para ver detalhes...
+      </Text>
     </TouchableOpacity>
   );
 };
 
 const localStyles = StyleSheet.create({
   card: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 8,
     padding: 15,
     marginVertical: 8,
     marginHorizontal: 16,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
@@ -37,7 +42,7 @@ const localStyles = StyleSheet.create({
   },
   locationText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 5,
   },
   detailText: {
@@ -46,17 +51,17 @@ const localStyles = StyleSheet.create({
   },
   dateText: {
     fontSize: 12,
-    color: '#666',
+    color: "#666",
     marginTop: 5,
-    textAlign: 'right',
+    textAlign: "right",
   },
   viewDetailsText: {
     fontSize: 14,
-    color: '#007AFF',
+    color: "#007AFF",
     marginTop: 5,
-    textAlign: 'center',
-    textDecorationLine: 'underline',
-  }
+    textAlign: "center",
+    textDecorationLine: "underline",
+  },
 });
 
 export default EventCard;
