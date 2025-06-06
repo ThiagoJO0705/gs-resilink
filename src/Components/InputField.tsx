@@ -49,7 +49,7 @@ const localStyles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#3A86FF",
     padding: 10,
     borderRadius: 5,
     fontSize: 16,

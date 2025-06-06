@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({
 
 const localStyles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: "#4444ff",
+    backgroundColor: "#023047",
     padding: 15,
     alignItems: "center",
     justifyContent: "space-between", 

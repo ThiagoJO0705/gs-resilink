@@ -60,7 +60,7 @@ const InterruptionTime: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgb(132, 210, 236)",
   },
   content: {
     flex: 1,

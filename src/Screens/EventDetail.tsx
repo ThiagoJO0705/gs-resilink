@@ -47,13 +47,13 @@ const EventDetail: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgb(132, 210, 236)",
   },
   scrollView: {
     padding: 16,
   },
   detailCard: {
-    backgroundColor: "white",
+    backgroundColor: "rgb(203, 232, 245)",
     borderRadius: 10,
     padding: 20,
     shadowColor: "#000",
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginTop: 10,
-    color: "#555",
+    color: "#3A86FF",
   },
   value: {
     fontSize: 18,

@@ -89,7 +89,7 @@ const AffectedLocation: React.FC<AffectedLocationProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgb(132, 210, 236)",
   },
   scrollViewContent: {
     flexGrow: 1,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   nearbyCard: {
-    backgroundColor: "white",
+    backgroundColor: "rgb(203, 232, 245)",
     borderRadius: 8,
     padding: 15,
     marginVertical: 8,
@@ -130,11 +130,11 @@ const styles = StyleSheet.create({
   nearbyLocation: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#007AFF",
+    color: "#3A86FF",
   },
   nearbyTime: {
     fontSize: 14,
-    color: "#555",
+    color: "#023047",
     marginTop: 5,
   },
   nearbyDetailsLink: {

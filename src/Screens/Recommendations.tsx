@@ -50,7 +50,7 @@ const RecommendationsScreen: React.FC = () => {
 const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgb(132, 210, 236)",
     padding: 16,
   },
   introText: {

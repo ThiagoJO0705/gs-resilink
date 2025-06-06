@@ -29,7 +29,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, onPress }) => {
 
 const localStyles = StyleSheet.create({
   card: {
-    backgroundColor: "white",
+    backgroundColor: "rgb(203, 232, 245)",
     borderRadius: 8,
     padding: 15,
     marginVertical: 8,
@@ -44,20 +44,22 @@ const localStyles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 5,
+    color: "#3A86FF"
   },
   detailText: {
     fontSize: 16,
     marginBottom: 3,
+    color: "#023047"
   },
   dateText: {
     fontSize: 12,
-    color: "#666",
     marginTop: 5,
     textAlign: "right",
+    color: "#023047"
   },
   viewDetailsText: {
     fontSize: 14,
-    color: "#007AFF",
+    color: "#3A86FF",
     marginTop: 5,
     textAlign: "center",
     textDecorationLine: "underline",

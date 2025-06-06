@@ -76,7 +76,7 @@ const GeneralOverview: React.FC<GeneralOverviewProps> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "rgb(132, 210, 236)"
   },
   scrollView: {
     flex: 1,
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     margin: 16,
-    color: "#333",
+    color: "#023047",
   },
   noEventsText: {
     textAlign: "center",
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     padding: 16,
     borderTopWidth: 1,
-    borderColor: "#eee",
-    backgroundColor: "white",
+    backgroundColor: "rgb(203, 232, 245)",
+    borderColor: "white"
   },
 });
 
