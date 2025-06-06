@@ -17,9 +17,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 interface AppNavigatorProps {
   events: EnergyOutageEvent[];
   addEvent: (newEvent: EnergyOutageEvent) => void;
+  nearbyEvents: EnergyOutageEvent[];
 }
 
-const AppNavigator: React.FC<AppNavigatorProps> = ({ events, addEvent }) => {
+const AppNavigator: React.FC<AppNavigatorProps> = ({ events, addEvent, nearbyEvents }) => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="GeneralOverview">
@@ -32,9 +33,11 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ events, addEvent }) => {
 
         <Stack.Screen
           name="AffectedLocation"
-          component={AffectedLocation}
           options={{ headerShown: false }}
-        />
+        >
+          {/* Passa os nearbyEvents para a AffectedLocationScreen */}
+          {(props) => <AffectedLocation {...props} nearbyEvents={nearbyEvents} />}
+        </Stack.Screen>
         <Stack.Screen
           name="InterruptionTime"
           component={InterruptionTime}

@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, Text, StyleSheet, Alert, TouchableOpacity, ScrollView } from 'react-native';
 import Header from '../Components/Header';
 import InputField from '../Components/InputField';
 import Button from '../Components/Button';
 import { useNavigation } from '@react-navigation/native';
 import { AppNavigationProp } from '../Navigation/types';
+import { EnergyOutageEvent } from '../types';
 
-const AffectedLocation: React.FC = () => {
-  const navigation = useNavigation<AppNavigationProp>();
+interface AffectedLocationProps {
+  nearbyEvents: EnergyOutageEvent[]; 
+  navigation: AppNavigationProp;
+  route: any;
+}
+
+const AffectedLocation: React.FC<AffectedLocationProps> = ({ nearbyEvents, navigation }) => {
   const [location, setLocation] = useState('');
 
   const handleNext = () => {
@@ -15,7 +21,6 @@ const AffectedLocation: React.FC = () => {
       Alert.alert('Erro', 'Por favor, informe a localização atingida.');
       return;
     }
-    // Navega para a próxima tela, passando a localização como parâmetro
     navigation.navigate('InterruptionTime', { location });
   };
 
@@ -23,25 +28,48 @@ const AffectedLocation: React.FC = () => {
     navigation.goBack(); // Volta para a tela anterior (GeneralOverview)
   };
 
+  const handleViewNearbyEventDetails = (event: EnergyOutageEvent) => {
+    navigation.navigate('EventDetail', { event }); // Navega para a tela de detalhes
+  };
+
   return (
     <View style={styles.container}>
       <Header
         title="Localização Atingida"
-        showBackButton={true} // Mostrar botão de voltar
-        onBackPress={handleGoBack} // Ação do botão de voltar
+        showBackButton={true}
+        onBackPress={handleGoBack}
       />
-      <View style={styles.content}>
-        <Text style={styles.instructionText}>
-          Informe a região impactada pela falta de energia (bairro, cidade ou CEP):
-        </Text>
-        <InputField
-          label="Localização"
-          value={location}
-          onChangeText={setLocation}
-          placeholder="Ex: Centro, São Paulo, 01000-000"
-        />
-        <Button title="Avançar" onPress={handleNext} />
-      </View>
+      <ScrollView style={styles.scrollViewContent}>
+        <View style={styles.section}>
+          <Text style={styles.instructionText}>
+            Informe a região impactada pela falta de energia (bairro, cidade ou CEP):
+          </Text>
+          <InputField
+            label="Localização"
+            value={location}
+            onChangeText={setLocation}
+            placeholder="Ex: Centro, São Paulo, 01000-000"
+          />
+          <Button title="Avançar" onPress={handleNext} />
+        </View>
+
+        {nearbyEvents.length > 0 && (
+          <View style={styles.nearbyLocationsSection}>
+            <Text style={styles.nearbyTitle}>Próximas de Mim:</Text>
+            {nearbyEvents.map((event) => (
+              <TouchableOpacity
+                key={event.id}
+                style={styles.nearbyCard}
+                onPress={() => handleViewNearbyEventDetails(event)}
+              >
+                <Text style={styles.nearbyLocation}>{event.location}</Text>
+                <Text style={styles.nearbyTime}>Interrupção: {event.interruptionTime}</Text>
+                <Text style={styles.nearbyDetailsLink}>Ver Detalhes</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
+      </ScrollView>
     </View>
   );
 };
@@ -51,15 +79,58 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f0f0f0',
   },
-  content: {
-    flex: 1,
+  scrollViewContent: {
+    flexGrow: 1,
     padding: 16,
+  },
+  section: {
+    marginBottom: 30, // Espaço entre a seção de input e a de "próximos"
   },
   instructionText: {
     fontSize: 16,
     marginBottom: 15,
     textAlign: 'center',
   },
+  nearbyLocationsSection: {
+    marginTop: 20,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: '#ddd',
+  },
+  nearbyTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+    color: '#333',
+  },
+  nearbyCard: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 15,
+    marginVertical: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+    elevation: 3,
+  },
+  nearbyLocation: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#007AFF',
+  },
+  nearbyTime: {
+    fontSize: 14,
+    color: '#555',
+    marginTop: 5,
+  },
+  nearbyDetailsLink: {
+    fontSize: 12,
+    color: '#007AFF',
+    marginTop: 10,
+    textAlign: 'right',
+    textDecorationLine: 'underline',
+  }
 });
-
 export default AffectedLocation;

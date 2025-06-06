@@ -21,13 +21,40 @@ export default function App() {
     },
   ]);
 
-  // Função para adicionar um novo evento
+  // Novos dados simulados para "Localizações Próximas"
+  const [nearbyEvents, setNearbyEvents] = useState<EnergyOutageEvent[]>([
+    {
+      id: '101',
+      location: 'Vila Mariana, São Paulo',
+      interruptionTime: '1 hora',
+      damages: 'Sem grandes prejuízos, energia retornou rápido.',
+      timestamp: '2025-06-05 22:00',
+    },
+    {
+      id: '102',
+      location: 'Pinheiros, São Paulo',
+      interruptionTime: '45 minutos',
+      damages: 'Alguns semáforos desligados, trânsito lento.',
+      timestamp: '2025-06-05 20:30',
+    },
+    {
+      id: '103',
+      location: 'Liberdade, São Paulo',
+      interruptionTime: '2 horas',
+      damages: 'Estabelecimentos comerciais afetados.',
+      timestamp: '2025-06-04 18:00',
+    },
+  ]);
+
+
+  // Função para adicionar um novo evento (para o fluxo de registro)
   const addEvent = (newEvent: EnergyOutageEvent) => {
     setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
   return (
-    // Passa a lista de eventos e a função addEvent para o AppNavigator
-    <AppNavigator events={events} addEvent={addEvent} />
+    // Passa a lista de eventos principais e a função addEvent para o AppNavigator
+    // E também passa os nearbyEvents para a tela AffectedLocation, através do AppNavigator
+    <AppNavigator events={events} addEvent={addEvent} nearbyEvents={nearbyEvents} />
   );
 }
